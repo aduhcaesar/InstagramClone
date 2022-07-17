@@ -14,7 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.instagramclone.auth.LoginScreen
 import com.example.instagramclone.auth.ProfileScreen
 import com.example.instagramclone.auth.SignupScreen
-//import com.example.instagramclone.data.PostData
+import com.example.instagramclone.data.PostData
 import com.example.instagramclone.main.*
 import com.example.instagramclone.ui.theme.InstagramCloneTheme
 import dagger.hilt.android.AndroidEntryPoint
@@ -68,38 +68,38 @@ fun InstagramApp() {
         composable(DestinationScreen.Feed.route) {
             FeedScreen(navController = navController, vm = vm)
         }
-        //composable(DestinationScreen.Search.route) {
-        //    SearchScreen(navController = navController, vm = vm)
-       // }
-       // composable(DestinationScreen.MyPosts.route) {
-       //     MyPostsScreen(navController = navController, vm = vm)
-       // }
+        composable(DestinationScreen.Search.route) {
+            SearchScreen(navController = navController, vm = vm)
+        }
+        composable(DestinationScreen.MyPosts.route) {
+            MyPostsScreen(navController = navController, vm = vm)
+        }
         composable(DestinationScreen.Profile.route) {
             ProfileScreen(navController = navController, vm = vm)
         }
-       // composable(DestinationScreen.NewPost.route) { navBackStachEntry ->
-         //   val imageUri = navBackStachEntry.arguments?.getString("imageUri")
-           // imageUri?.let {
-             //   NewPostScreen(navController = navController, vm = vm, encodedUri = it)
-            //}
-        //}
-        //composable(DestinationScreen.SinglePost.route) {
-          //  val postData = navController
-            //    .previousBackStackEntry
-              //  ?.arguments
-               // ?.getParcelable<PostData>("post")
-           // postData?.let {
-             //   SinglePostScreen(
-               //     navController = navController,
-                 //   vm = vm,
-                   // post = postData
-                //)
-            //}
-        //}
-        //composable(DestinationScreen.CommentsScreen.route) { navBackStackEntry ->
-          //  val postId = navBackStackEntry.arguments?.getString("postId")
-            //postId?.let { CommentsScreen(navController = navController, vm = vm, postId = it) }
-        //}
+        composable(DestinationScreen.NewPost.route) { navBackStachEntry ->
+            val imageUri = navBackStachEntry.arguments?.getString("imageUri")
+            imageUri?.let {
+                NewPostScreen(navController = navController, vm = vm, encodedUri = it)
+            }
+        }
+        composable(DestinationScreen.SinglePost.route) {
+            val postData = navController
+                .previousBackStackEntry
+                ?.arguments
+                ?.getParcelable<PostData>("post")
+            postData?.let {
+                SinglePostScreen(
+                    navController = navController,
+                    vm = vm,
+                    post = postData
+                )
+            }
+        }
+        composable(DestinationScreen.CommentsScreen.route) { navBackStackEntry ->
+            val postId = navBackStackEntry.arguments?.getString("postId")
+            postId?.let { CommentsScreen(navController = navController, vm = vm, postId = it) }
+        }
     }
 }
 
