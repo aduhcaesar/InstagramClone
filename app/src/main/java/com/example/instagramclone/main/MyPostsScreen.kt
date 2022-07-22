@@ -215,3 +215,39 @@ fun PostList(
         }
     }
 }
+
+@Composable
+fun PostsRow(item: PostRow, onPostClick: (PostData) -> Unit) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(120.dp)
+    ) {
+        PostImage(imageUrl = item.post1?.postImage, modifier = Modifier
+            .weight(1f)
+            .clickable { item.post1?.let { post -> onPostClick(post) } }
+        )
+        PostImage(imageUrl = item.post2?.postImage, modifier = Modifier
+            .weight(1f)
+            .clickable { item.post2?.let { post -> onPostClick(post) } }
+        )
+        PostImage(imageUrl = item.post3?.postImage, modifier = Modifier
+            .weight(1f)
+            .clickable { item.post3?.let { post -> onPostClick(post) } }
+        )
+    }
+}
+
+@Composable
+fun PostImage(imageUrl: String?, modifier: Modifier) {
+    Box(modifier = modifier) {
+        var modifier = Modifier
+            .padding(1.dp)
+            .fillMaxSize()
+        if (imageUrl == null) {
+            modifier = modifier.clickable(enabled = false) {}
+        }
+        CommonImage(data = imageUrl, modifier = modifier, contentScale = ContentScale.Crop)
+    }
+}
+
